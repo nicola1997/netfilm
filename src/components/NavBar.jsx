@@ -1,6 +1,6 @@
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
-
+import './NavBar.css'
 function NavBar() {
     return (
         <Navbar className="bg-body-tertiary">
