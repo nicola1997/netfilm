@@ -5,7 +5,6 @@ const BASE_URL = 'http://localhost:8080/api/movies'; // Replace this with your a
 export const getMovie = async () => {
     try {
         const response = await axios.get(BASE_URL + "/getAllMovies", {});
-        console.log(response.data)
         return response.data;
     } catch (error) {
         //throw error;
