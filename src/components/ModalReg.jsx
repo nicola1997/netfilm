@@ -3,11 +3,11 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { Form } from "react-bootstrap";
 
-function ModalReg({ show, handleClose }) {
+function ModalReg({ show, close }) {
     // Puoi anche gestire il form qui se necessario
 
     return (
-        <Modal show={show} onHide={handleClose}>
+        <Modal show={show} onHide={close}>
             <Modal.Header closeButton>
                 <Modal.Title>Registrati</Modal.Title>
             </Modal.Header>
@@ -33,11 +33,8 @@ function ModalReg({ show, handleClose }) {
                 </Form>
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
+                <Button variant="secondary" onClick={close}>
                     Close
-                </Button>
-                <Button variant="primary" onClick={handleClose}>
-                    Save Changes
                 </Button>
             </Modal.Footer>
         </Modal>
