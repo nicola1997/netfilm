@@ -62,7 +62,7 @@ function ModalReg({ show, close }) {
                 </Form>
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="secondary" onClick={close}>
+                <Button variant="secondary" onClick={() => { saveUser(); close(); }}>
                     Close
                 </Button>
             </Modal.Footer>
