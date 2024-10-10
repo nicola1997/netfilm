@@ -10,6 +10,7 @@ function Film() {
     return (
         <div>
             <NavBar></NavBar>
+
             <Container>
                 <Row>
                     {movies.map((film, index) => (
