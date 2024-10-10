@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react'
 import './App.css'
 import Navbar from "./components/NavBar.jsx";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {getMovie} from "./services/Movie.ts";
+import {getMovie} from "./services/Movie.js";
 import Container from "react-bootstrap/Container";
 import {Col, Row} from "react-bootstrap";
 import CardFilm from "./components/CardFilm.jsx";
@@ -20,6 +20,7 @@ function App() {
 
 
     const fetchMovies = async () => {
+        debugger
         const movies = await getMovie()
         setLocalMovies(movies);
         dispatch(setMovies(movies))
