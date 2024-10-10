@@ -20,7 +20,6 @@ function App() {
 
 
     const fetchMovies = async () => {
-        debugger
         const movies = await getMovie()
         setLocalMovies(movies);
         dispatch(setMovies(movies))

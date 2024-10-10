@@ -1,28 +1,39 @@
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import {Form} from "react-bootstrap";
-import {setUser} from "../services/Movie.js";
+import {login, setUser} from "../services/Movie.js";
 import {useState} from "react";
 
-function ModalReg({show, close}) {
+function ModalAccedi({show, close,joined,failAccess}) {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const saveUser = () => {
+    const loginUser = async () => {
         const userData = {
             username: username,
             email: email,
             password: password
         };
-        console.log(userData)
-        setUser(userData);
+
+        try {
+            const response = await login(userData);
+            if (response ==="Login riuscito") { // Sostituisci response.success con la condizione giusta
+                joined();
+            } else {
+                failAccess();
+                console.error("Login fallito"); // Messaggio di errore se il login non va a buon fine
+            }
+        } catch (error) {
+            console.error(error.message); // Stampa l'errore nella console
+        }
     };
+
 
     return (
         <Modal show={show} onHide={close}>
             <Modal.Header closeButton>
-                <Modal.Title>Registrati</Modal.Title>
+                <Modal.Title>Accedi</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Form>
@@ -34,9 +45,7 @@ function ModalReg({show, close}) {
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}  // Aggiorna lo stato email
                         />
-                        <Form.Text className="text-muted">
-                            We'll never share your email with anyone else.
-                        </Form.Text>
+
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="formBasicPassword">
                         <Form.Label>Password</Form.Label>
@@ -57,10 +66,10 @@ function ModalReg({show, close}) {
                         />
                     </Form.Group>
                     <Button variant="primary" onClick={() => {
-                        saveUser();
+                        loginUser();
                         close();
                     }}>
-                        Submit
+                        Invia
                     </Button>
                 </Form>
             </Modal.Body>
@@ -73,4 +82,4 @@ function ModalReg({show, close}) {
     );
 }
 
-export default ModalReg;
+export default ModalAccedi;
