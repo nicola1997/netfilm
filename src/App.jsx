@@ -6,16 +6,23 @@ import {getMovie} from "./services/Movie.ts";
 import Container from "react-bootstrap/Container";
 import {Col, Row} from "react-bootstrap";
 import CardFilm from "./components/CardFilm.jsx";
+import { useDispatch, useSelector } from 'react-redux';
+import {setMovies} from "./redux/MovieSlice.js";
 
 
 function App() {
     const [localMovies, setLocalMovies] = useState([]);
+    const dispatch = useDispatch();
+
     const fetchMovies = async () => {
-        setLocalMovies(await getMovie());
+        const movies=await getMovie()
+        setLocalMovies(movies);
+        dispatch(setMovies(movies))
     }
 
     useEffect(() => {
        fetchMovies()
+
     }, []);
 
     return (

@@ -11,14 +11,9 @@ export const getMovie = async () => {
     }
 };
 
-export const uploadContingentiExcel = async (fileContingenti: any, idSel: number, codTipCan: any) => {
+export const createMovie = async () => {
     try {
-        const response = await axios.post(BASE_URL + "/uploadContingentiExcel", fileContingenti, {
-            params: {
-                idSel: idSel,
-                codTipCan: codTipCan
-            }
-        });
+        const response = await axios.post(BASE_URL + "/createMovie",{});
         return response.data;
     } catch (error) {
         //throw error;
