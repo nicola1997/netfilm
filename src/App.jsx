@@ -10,6 +10,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {setMovies} from "./redux/MovieSlice.js";
 import CarouselsFilm from "./components/CarouselsFilm.jsx";
 import './components/TextStyle.css'
+import EuroInput from "./components/EuroInput.jsx";
 
 
 function App() {
