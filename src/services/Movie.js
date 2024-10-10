@@ -13,8 +13,7 @@ export const getMovie = async () => {
 
 export const setUser = async (userData) => {
     try {
-        const response = await axios.post(BASE_URL + "/saveUser",
-            {userData});
+        const response = await axios.post(BASE_URL + "/saveUser", userData);
         return response.data;
     } catch (error) {
         //throw error;
