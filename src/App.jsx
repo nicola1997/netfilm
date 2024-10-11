@@ -37,7 +37,7 @@ function App() {
                 <Row>
                     {movies.map((film, index) => (
                         <Col key={index}>
-                            <CardFilm titolo={film.title} desc={film.descrizione} img={film.img}/>
+                            <CardFilm img={film.img}/>
                         </Col>
                     ))}
                 </Row>
