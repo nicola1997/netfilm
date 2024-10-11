@@ -17,20 +17,9 @@
 .imgStyle:hover {
     width: 210px;
     height: 230px;
-    animation: an-li 2000ms;
 
 }
 
-.cardStyle:hover {
-    animation: an-li 2000ms;
-}
 
-@keyframes an-li {
-    from {
-        width: 200px;
-    }
-    to {
-        width: 220px;
-    }
-}
+
 
