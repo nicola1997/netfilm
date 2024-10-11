@@ -1,7 +1,7 @@
-import React from 'react';
-import {Button, Card, Modal, Form} from 'react-bootstrap';
+import React, { useEffect } from 'react';
+import { Button, Card, Modal, Form } from 'react-bootstrap';
 import NavBar from "./NavBar.jsx";
-import {useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
     setUsernameRedux,
     setEmailRedux,
@@ -15,16 +15,36 @@ import {
 const User = () => {
     const dispatch = useDispatch();
 
-    const {username, email, password, name, surname, birthdate, bio} = useSelector((state) => state.user);
+    const { username, email, password, name, surname, birthdate, bio } = useSelector((state) => state.user);
 
     const [showModal, setShowModal] = React.useState(false);
+
+    // Recupera i dati dal localStorage quando il componente viene montato
+    useEffect(() => {
+        const storedData = JSON.parse(localStorage.getItem('userProfile'));
+        if (storedData) {
+            dispatch(setNameRedux(storedData.name));
+            dispatch(setSurnameRedux(storedData.surname));
+            dispatch(setBirthdateRedux(storedData.birthdate));
+            dispatch(setBioRedux(storedData.bio));
+        }
+    }, [dispatch]);
 
     const handleEdit = () => {
         setShowModal(true);
     };
 
     const handleSave = () => {
-        // Logica per salvare i dati modificati
+        // Logica per salvare i dati modificati nel localStorage
+        const userData = {
+            name,
+            surname,
+            birthdate,
+            bio
+        };
+        localStorage.setItem('userProfile', JSON.stringify(userData));
+
+        // Aggiornamento dei dati nel Redux
         dispatch(setUsernameRedux(username));
         dispatch(setEmailRedux(email));
         dispatch(setPasswordRedux(password));
@@ -32,22 +52,23 @@ const User = () => {
         dispatch(setSurnameRedux(surname));
         dispatch(setBirthdateRedux(birthdate));
         dispatch(setBioRedux(bio));
+
         setShowModal(false);
     };
 
     return (
         <div>
-            <NavBar/>
-            <Card style={{width: '18rem', margin: '20px', backgroundColor: '#f8f9fa'}}>
+            <NavBar />
+            <Card style={{ width: '18rem', margin: '20px', backgroundColor: '#f8f9fa' }}>
                 <Card.Body>
                     <Card.Title>
                         <span role="img" aria-label="film">🎬</span> {username || "Username"}
                     </Card.Title>
                     <Card.Subtitle className="mb-2 text-muted">{email || "Email non disponibile"}</Card.Subtitle>
                     <Card.Text>
-                        <strong>Nome:</strong> {name || "Nome"}<br/>
-                        <strong>Cognome:</strong> {surname || "Cognome"}<br/>
-                        <strong>Data di nascita:</strong> {birthdate || "01/01/1990"}<br/>
+                        <strong>Nome:</strong> {name || "Nome"}<br />
+                        <strong>Cognome:</strong> {surname || "Cognome"}<br />
+                        <strong>Data di nascita:</strong> {birthdate || "01/01/1990"}<br />
                         <strong>Bio:</strong> {bio || "Nessuna bio disponibile."}
                     </Card.Text>
 
