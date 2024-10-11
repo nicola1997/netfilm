@@ -1,7 +1,7 @@
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import './NavBar.css';
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Button from "react-bootstrap/Button";
 import ModalReg from "./ModalReg.jsx";
 import {Alert, NavbarText} from "react-bootstrap";
@@ -9,6 +9,7 @@ import {Link} from "react-router-dom";
 import './TextStyle.css'
 import ModalAccedi from "./ModalAccedi.jsx";
 import AlertDismissibleExample from "./AlertDismissibleExample.jsx";
+import {useSelector} from "react-redux";
 
 function NavBar() {
     const [log, setLog] = useState(false);
@@ -25,10 +26,20 @@ function NavBar() {
     const closeModal = () => setModal(false);
     const closeModalAccedi = () => setModalAccedi(false);
     const joined = () => setIsJoin(true);
+    const username = useSelector((state) => state.user.username);
+    const email = useSelector((state) => state.user.email);
+
     const failAccess = () => {
         debugger
         setFailAccesso(true)
     }
+    useEffect(() => {
+        if (username !== '' && email !== '') {
+            setIsJoin(true)
+        } else {
+            setIsJoin(false)
+        }
+    }, [username]);
 
     return (
         <div>
