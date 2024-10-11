@@ -6,5 +6,6 @@ export default configureStore({
     reducer: {
         movies: moviesReducer,
         user: userReducer,
+        
     },
 });
