@@ -2,7 +2,7 @@
 .TextStyle {
     color: black;
     font-size: 2em;
-    font-family: Fantasy, serif;
+    font-family: Fantasy, fantasy;
     text-align: center;
     margin-top: 20px;
 }
