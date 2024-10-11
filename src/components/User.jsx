@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { Button, Card, Modal, Form } from 'react-bootstrap';
 import NavBar from "./NavBar.jsx";
-import UserSlice from "../redux/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import {
     setUsernameRedux,
