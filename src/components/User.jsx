@@ -1,21 +1,23 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Button, Card, Modal, Form} from 'react-bootstrap';
 import NavBar from "./NavBar.jsx";
 import {useDispatch, useSelector} from "react-redux";
-import {setUsernameRedux, setEmailRedux, setPasswordRedux} from '../redux/userSlice';
+import {
+    setUsernameRedux,
+    setEmailRedux,
+    setPasswordRedux,
+    setNameRedux,
+    setSurnameRedux,
+    setBirthdateRedux,
+    setBioRedux
+} from '../redux/userSlice';
 
 const User = () => {
     const dispatch = useDispatch();
 
-    const username = useSelector((state) => state.user.username);
-    const email = useSelector((state) => state.user.email);
-    const password = useSelector((state) => state.user.password);
+    const {username, email, password, name, surname, birthdate, bio} = useSelector((state) => state.user);
 
-    const [name, setName] = useState('Nome');
-    const [surname, setSurname] = useState('Cognome');
-    const [birthdate, setBirthdate] = useState('01/01/1990');
-    const [bio, setBio] = useState('');
-    const [showModal, setShowModal] = useState(false);
+    const [showModal, setShowModal] = React.useState(false);
 
     const handleEdit = () => {
         setShowModal(true);
@@ -23,9 +25,13 @@ const User = () => {
 
     const handleSave = () => {
         // Logica per salvare i dati modificati
-        dispatch(setUsernameRedux(username));  // Aggiorna il Redux con i nuovi valori se necessario
+        dispatch(setUsernameRedux(username));
         dispatch(setEmailRedux(email));
         dispatch(setPasswordRedux(password));
+        dispatch(setNameRedux(name));
+        dispatch(setSurnameRedux(surname));
+        dispatch(setBirthdateRedux(birthdate));
+        dispatch(setBioRedux(bio));
         setShowModal(false);
     };
 
@@ -39,9 +45,9 @@ const User = () => {
                     </Card.Title>
                     <Card.Subtitle className="mb-2 text-muted">{email || "Email non disponibile"}</Card.Subtitle>
                     <Card.Text>
-                        <strong>Nome:</strong> {name}<br/>
-                        <strong>Cognome:</strong> {surname}<br/>
-                        <strong>Data di nascita:</strong> {birthdate}<br/>
+                        <strong>Nome:</strong> {name || "Nome"}<br/>
+                        <strong>Cognome:</strong> {surname || "Cognome"}<br/>
+                        <strong>Data di nascita:</strong> {birthdate || "01/01/1990"}<br/>
                         <strong>Bio:</strong> {bio || "Nessuna bio disponibile."}
                     </Card.Text>
 
@@ -70,22 +76,22 @@ const User = () => {
 
                         <Form.Group className="mb-3">
                             <Form.Label>Nome</Form.Label>
-                            <Form.Control type="text" value={name} onChange={(e) => setName(e.target.value)} />
+                            <Form.Control type="text" value={name} onChange={(e) => dispatch(setNameRedux(e.target.value))} />
                         </Form.Group>
 
                         <Form.Group className="mb-3">
                             <Form.Label>Cognome</Form.Label>
-                            <Form.Control type="text" value={surname} onChange={(e) => setSurname(e.target.value)} />
+                            <Form.Control type="text" value={surname} onChange={(e) => dispatch(setSurnameRedux(e.target.value))} />
                         </Form.Group>
 
                         <Form.Group className="mb-3">
                             <Form.Label>Data di nascita</Form.Label>
-                            <Form.Control type="text" value={birthdate} onChange={(e) => setBirthdate(e.target.value)} />
+                            <Form.Control type="text" value={birthdate} onChange={(e) => dispatch(setBirthdateRedux(e.target.value))} />
                         </Form.Group>
 
                         <Form.Group className="mb-3">
                             <Form.Label>Bio</Form.Label>
-                            <Form.Control as="textarea" rows={3} value={bio} onChange={(e) => setBio(e.target.value)} />
+                            <Form.Control as="textarea" rows={3} value={bio} onChange={(e) => dispatch(setBioRedux(e.target.value))} />
                         </Form.Group>
                     </Form>
                 </Modal.Body>
