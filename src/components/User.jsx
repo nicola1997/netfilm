@@ -87,12 +87,12 @@ const User = () => {
                     <Form>
                         <Form.Group className="mb-3">
                             <Form.Label>Username</Form.Label>
-                            <Form.Control type="text" value={username} onChange={(e) => dispatch(setUsernameRedux(e.target.value))} />
+                            <Form.Control disabled={true} type="text" value={username} onChange={(e) => dispatch(setUsernameRedux(e.target.value))} />
                         </Form.Group>
 
                         <Form.Group className="mb-3">
                             <Form.Label>Email</Form.Label>
-                            <Form.Control type="email" value={email} onChange={(e) => dispatch(setEmailRedux(e.target.value))} />
+                            <Form.Control disabled={true} type="email" value={email} onChange={(e) => dispatch(setEmailRedux(e.target.value))} />
                         </Form.Group>
 
                         <Form.Group className="mb-3">
