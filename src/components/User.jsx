@@ -10,7 +10,7 @@ import {
     setSurnameRedux,
     setBirthdateRedux,
     setBioRedux
-} from '../redux/userSlice.js';
+} from '../redux/UserSlice.js';
 
 const User = () => {
     const dispatch = useDispatch();
